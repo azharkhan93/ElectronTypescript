@@ -1,148 +1,156 @@
-import React, { useEffect, useState } from 'react';
-import './Application.scss';
-import { icons } from './Icons';
+/* eslint-disable react/jsx-no-undef */
+/* eslint-disable import/no-unresolved */
+import React from 'react';
+// import useTabGroup from './useTab';
+import './common.css';
+ import './nav-bar.css';
+import './tabcontrol.css';
+import './navbar.css';
 
 const Application: React.FC = () => {
-  const [counter, setCounter] = useState(0);
-  const [darkTheme, setDarkTheme] = useState(true);
-  const [versions, setVersions] = useState<Record<string, string>>({});
+  const navGoBack = () => {
+    // Implement your logic for navigating back here
+  };
 
-  /**
-   * On component mount
-   */
-  useEffect(() => {
-    const useDarkTheme = parseInt(localStorage.getItem('dark-mode'));
-    if (isNaN(useDarkTheme)) {
-      setDarkTheme(true);
-    } else if (useDarkTheme == 1) {
-      setDarkTheme(true);
-    } else if (useDarkTheme == 0) {
-      setDarkTheme(false);
-    }
+  const navGoForward = () => {
+    // Implement your logic for navigating forward here
+  };
 
-    // Apply verisons
-    const app = document.getElementById('app');
-    const versions = JSON.parse(app.getAttribute('data-versions'));
-    setVersions(versions);
-  }, []);
+  const navReload = () => {
+    // Implement your logic for reloading here
+  };
 
-  /**
-   * On Dark theme change
-   */
-  useEffect(() => {
-    if (darkTheme) {
-      localStorage.setItem('dark-mode', '1');
-      document.body.classList.add('dark-mode');
-    } else {
-      localStorage.setItem('dark-mode', '0');
-      document.body.classList.remove('dark-mode');
-    }
-  }, [darkTheme]);
+  const increaseZoom = () => {
+    // Implement your logic for increasing zoom here
+  };
 
-  /**
-   * Toggle Theme
-   */
-  function toggleTheme() {
-    setDarkTheme(!darkTheme);
-  }
+  const decreaseZoom = () => {
+    // Implement your logic for decreasing zoom here
+  };
+
+  const resetZoom = () => {
+    // Implement your logic for resetting zoom here
+  };
+
+  const openZoomMenu = () => {
+    // Implement your logic for opening the zoom menu here
+  };
+  
+  const tabGroupStyles = {
+    tabcontent: {
+      /* display: none; */
+    },
+    etabs: {
+      display: 'flex',
+    },
+    'nav.visible': {
+      display: 'flex',
+      width: '60px',
+      height: '97vh',
+      backgroundColor: '#ffffff',
+      border: 'none',
+      flexDirection: 'column',
+      borderRight: '1px solid #bbbbbb29',
+      boxShadow: '10px 0 8px -8px #00000054',
+    },
+    views: {
+      position: 'relative',
+      height: 'calc(100vh - 35px)',
+      width: '100vw',
+    },
+    'tab.active': {
+      background: '#00000017',
+      border: 'none',
+      borderLeft: '1px solid #00c4ff',
+      boxShadow: 'none',
+      paddingLeft: '7px',
+    },
+    'tab-icon': {
+      height: '20px',
+      width: '20px',
+    },
+    'tab-icon img': {
+      maxWidth: '20px',
+      maxHeight: '20px',
+    },
+    'tab-title, .tab-close': {
+      display: 'none',
+    },
+    buttons: {
+      borderLeft: 'none',
+      padding: '0px',
+      display: 'none',
+    },
+    'tab.visible:not(.active) + .tab.visible:not(.active)': {
+      borderLeft: 'none',
+      paddingLeft: '8px',
+    },
+  };
+  // useTabGroup();
 
   return (
-    <div id='erwt'>
-      <div className='header'>
-        <div className='main-heading'>
-          <h1 className='themed'>ERWT - Electron Boilerplate</h1>
-        </div>
-        <div className='main-teaser'>
-          <div>
-            Robust boilerplate for Desktop Applications with Electron and
-            ReactJS.
-            <br />
-            Hot Reloading is used in this project for fast development
-            experience.
-            <br />
-            If you think the project is useful enough, just spread the word
-            around!
-          </div>
-        </div>
-        <div className='versions'>
-          <div className='item'>
-            <div>
-              <img className='item-icon' src={icons.electron} /> Electron
+    <div className="app-container">
+      <div className="app-nav-bar-container">
+        <div className="nav-bar-all-elems">
+          <div className="nav-bar-branding-navigation-control-container">
+            <div className="nav-bar-branding-container">
+              <div className="nav-bar-logo-container">
+                <img src="./assets/images/logo.png" height="100%" alt="" />
+              </div>
+              <div className="nav-bar-label-container">Meetonbubble</div>
             </div>
-            <span>{versions?.electron}</span>
-          </div>
-          <div className='item'>
-            <div>
-              <img className='item-icon' src={icons.erwt} /> ERWT
+            <div className="nav-bar-navigation-control-container">
+              <div className="nav-bar-back-forward-container navicon" onClick={navGoBack}>
+                <img src="./assets/images/go-back.svg" height="100%" alt="" />
+              </div>
+              <div className="nav-bar-forward-container navicon" onClick={navGoForward}>
+                <img src="./assets/images/go-forward.svg" height="100%" alt="" />
+              </div>
+              <div className="nav-bar-reload-container navicon" onClick={navReload}>
+                <img src="./assets/images/reload.svg" height="100%" alt="" />
+              </div>
             </div>
-            <span>{versions?.erwt}</span>
           </div>
-          <div className='item'>
-            <div>
-              <img className='item-icon' src={icons.typescript} /> Typescript
+          <div className="tabs-elem-controlbar-container" id="tabsControlbarContainer">
+            <div className="tab-group-elems-container" id="tabGroupContainer">
+              {/* Add tab content here */}
             </div>
-            <span>{versions?.typescript}</span>
           </div>
-          <div className='item'>
-            <div>
-              <img className='item-icon' src={icons.nodejs} /> Nodejs
-            </div>
-            <span>{versions?.node}</span>
+          <div className="nav-bar-app-title-container">
+            <div className="nav-bar-title-label">Gmail</div>
           </div>
-          <div className='item'>
-            <div>
-              <img className='item-icon' src={icons.react} /> React
+          <div className="nav-bar-zoom-container">
+            <div className="nav-bar-zoom-percent-text-plus-minus-reset-container">
+              <div className="nav-bar-zoom-percent-text-container"></div>
+              <div className="nav-bar-zoom-percent-plus-container navicon" onClick={increaseZoom}>
+                <img src="./assets/images/zoom-plus.svg" height="100%" alt="" />
+              </div>
+              <div className="nav-bar-zoom-percent-minus-container navicon" onClick={decreaseZoom}>
+                <img src="./assets/images/zoom-minus.svg" height="100%" width="14px" alt="" />
+              </div>
+              <div className="nav-bar-zoom-percent-reset-container" onClick={resetZoom}>
+                Reset
+              </div>
             </div>
-            <span>{versions?.react}</span>
-          </div>
-          <div className='item'>
-            <div>
-              <img className='item-icon' src={icons.webpack} /> Webpack
+            <div className="nav-bar-zoom-icon-container navicon" onClick={openZoomMenu}>
+              <img src="./assets/images/zoomin.svg" height="100%" alt="" />
             </div>
-            <span>{versions?.webpack}</span>
-          </div>
-          <div className='item'>
-            <div>
-              <img className='item-icon' src={icons.chrome} /> Chrome
-            </div>
-            <span>{versions?.chrome}</span>
-          </div>
-          <div className='item'>
-            <div>
-              <img className='item-icon' src={icons.license} /> License
-            </div>
-            <span>{versions?.license}</span>
           </div>
         </div>
       </div>
-
-      <div className='footer'>
-        <div className='center'>
-          <button
-            onClick={() => {
-              if (counter > 99) return alert('Going too high!!');
-              setCounter(counter + 1);
-            }}
-          >
-            Increment {counter != 0 ? counter : ''} <span>{counter}</span>
-          </button>
-          &nbsp;&nbsp; &nbsp;&nbsp;
-          <button
-            onClick={() => {
-              if (counter == 0) return alert('Oops.. thats not possible!');
-              setCounter(counter > 0 ? counter - 1 : 0);
-            }}
-          >
-            Decrement <span>{counter}</span>
-          </button>
-          &nbsp;&nbsp; &nbsp;&nbsp;
-          <button onClick={toggleTheme}>
-            {darkTheme ? 'Light Theme' : 'Dark Theme'}
-          </button>
-        </div>
-      </div>
+      {/* <TabGroup> */}
+        <style>
+          
+          {Object.entries(tabGroupStyles).map(([selector, styles]) => (
+            `${selector} { ${Object.entries(styles)
+              .map(([property, value]) => `${property}: ${value};`)
+              .join(' ')} }`
+          ))}
+        </style>
+      {/* </TabGroup> */}
     </div>
   );
 };
 
 export default Application;
+
