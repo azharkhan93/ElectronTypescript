@@ -21,7 +21,8 @@ export function createAppWindow(): BrowserWindow {
     autoHideMenuBar: true,
     icon: path.resolve('assets/images/appIcon.ico'),
     webPreferences: {
-      nodeIntegration: false,
+      nodeIntegration: true,
+      webviewTag: true,
       contextIsolation: true,
       nodeIntegrationInWorker: false,
       nodeIntegrationInSubFrames: false,
@@ -35,6 +36,7 @@ export function createAppWindow(): BrowserWindow {
 
   // Show window when its ready to
   appWindow.on('ready-to-show', () => appWindow.show());
+  appWindow.webContents.openDevTools();
 
   // Close all windows when main window is closed
   appWindow.on('close', () => {
